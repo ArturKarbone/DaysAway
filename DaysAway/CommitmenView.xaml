@@ -1,0 +1,58 @@
+﻿<Page
+    x:Name="pageRoot"
+    x:Class="DaysAway.CommitmentView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DaysAway"
+    xmlns:data="using:DaysAway.Data"
+    xmlns:conv="using:DaysAway.Converters"
+  
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    DataContext="{Binding DefaultViewModel.Commitment, RelativeSource={RelativeSource Self}}"
+    d:DataContext="{Binding Commitments[0], Source={d:DesignData Source=/DataModel/SampleData.json}}"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Transitions>
+        <TransitionCollection>
+            <NavigationThemeTransition>
+                <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                    <ContinuumNavigationTransitionInfo/>
+                </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+            </NavigationThemeTransition>
+        </TransitionCollection>
+    </Page.Transitions>
+    <Page.Resources>
+        <conv:DateTimeToDateTimeOffsetConverter  x:Key="DateTimeToDateTimeOffsetConverter"></conv:DateTimeToDateTimeOffsetConverter>
+
+
+    </Page.Resources>
+
+    <!--
+        This grid acts as a root panel for the page that defines two rows:
+        * Row 0 contains the page title
+        * Row 1 contains the rest of the page layout
+    -->
+    <Grid>
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Title Panel -->
+        <StackPanel Grid.Row="0" Margin="19,0,0,0">
+            <TextBlock x:Uid="Header" Text="application name" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
+            <TextBox Text="{Binding Title,Mode=TwoWay}" Margin="0,-6.5,0,26.5"  TextWrapping="NoWrap" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}" />
+            <DatePicker Date="{Binding DueDate, Converter={StaticResource DateTimeToDateTimeOffsetConverter},Mode=TwoWay}"/>
+            <TextBlock Text="{Binding Title, Mode=TwoWay}"></TextBlock>
+            <Button Content="Save" Click="Button_Click" />
+        </StackPanel>
+
+
+    </Grid>
+</Page>

@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Machine>ARTURK-MAC</Machine>
+    <WindowsUser>ArturK</WindowsUser>
+    <TargetPlatformIdentifier>WindowsPhoneApp</TargetPlatformIdentifier>
+    <SolutionConfiguration>Debug|AnyCPU</SolutionConfiguration>
+    <PackageArchitecture>neutral</PackageArchitecture>
+    <PackageIdentityName>c2e564d9-c0ea-43b6-80f9-ef26a7d90fe4</PackageIdentityName>
+    <IntermediateOutputPath>C:\Users\ArturK\Documents\Visual Studio 2013\Projects\DaysAway\DaysAway\obj\Debug\</IntermediateOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppXManifest Include="C:\Users\ArturK\Documents\Visual Studio 2013\Projects\DaysAway\DaysAway\bin\Debug\AppxManifest.xml">
+      <PackagePath>AppxManifest.xml</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppXManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxPackagedFile Include="C:\Users\ArturK\Documents\Visual Studio 2013\Projects\DaysAway\DaysAway\bin\Debug\DaysAway.exe">
+      <PackagePath>DaysAway.exe</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ArturK\Documents\Visual Studio 2013\Projects\DaysAway\packages\AutoMapper.3.3.1\lib\wpa81\AutoMapper.dll">
+      <PackagePath>AutoMapper.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ArturK\Documents\Visual Studio 2013\Projects\DaysAway\packages\AutoMapper.3.3.1\lib\wpa81\AutoMapper.WPA81.dll">
+      <PackagePath>AutoMapper.WPA81.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ArturK\Documents\Visual Studio 2013\Projects\DaysAway\DaysAway\Assets\DarkGray.png">
+      <PackagePath>Assets\DarkGray.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ArturK\Documents\Visual Studio 2013\Projects\DaysAway\DaysAway\Assets\LightGray.png">
+      <PackagePath>Assets\LightGray.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ArturK\Documents\Visual Studio 2013\Projects\DaysAway\DaysAway\Assets\MediumGray.png">
+      <PackagePath>Assets\MediumGray.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ArturK\Documents\Visual Studio 2013\Projects\DaysAway\DaysAway\Assets\HubBackground.theme-dark.png">
+      <PackagePath>Assets\HubBackground.theme-dark.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ArturK\Documents\Visual Studio 2013\Projects\DaysAway\DaysAway\Assets\HubBackground.theme-light.png">
+      <PackagePath>Assets\HubBackground.theme-light.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ArturK\Documents\Visual Studio 2013\Projects\DaysAway\DaysAway\Assets\Logo.scale-240.png">
+      <PackagePath>Assets\Logo.scale-240.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ArturK\Documents\Visual Studio 2013\Projects\DaysAway\DaysAway\Assets\SmallLogo.scale-240.png">
+      <PackagePath>Assets\SmallLogo.scale-240.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ArturK\Documents\Visual Studio 2013\Projects\DaysAway\DaysAway\Assets\SplashScreen.scale-240.png">
+      <PackagePath>Assets\SplashScreen.scale-240.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ArturK\Documents\Visual Studio 2013\Projects\DaysAway\DaysAway\Assets\Square71x71Logo.scale-240.png">
+      <PackagePath>Assets\Square71x71Logo.scale-240.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ArturK\Documents\Visual Studio 2013\Projects\DaysAway\DaysAway\Assets\StoreLogo.scale-240.png">
+      <PackagePath>Assets\StoreLogo.scale-240.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ArturK\Documents\Visual Studio 2013\Projects\DaysAway\DaysAway\Assets\WideLogo.scale-240.png">
+      <PackagePath>Assets\WideLogo.scale-240.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ArturK\Documents\Visual Studio 2013\Projects\DaysAway\DaysAway\Common\ReadMe.txt">
+      <PackagePath>Common\ReadMe.txt</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ArturK\Documents\Visual Studio 2013\Projects\DaysAway\DaysAway\DataModel\SampleData.json">
+      <PackagePath>DataModel\SampleData.json</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ArturK\Documents\Visual Studio 2013\Projects\DaysAway\DaysAway\bin\Debug\App.xbf">
+      <PackagePath>App.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ArturK\Documents\Visual Studio 2013\Projects\DaysAway\DaysAway\bin\Debug\CommitmentGridView.xbf">
+      <PackagePath>CommitmentGridView.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ArturK\Documents\Visual Studio 2013\Projects\DaysAway\DaysAway\bin\Debug\CommitmenView.xbf">
+      <PackagePath>CommitmenView.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ArturK\Documents\Visual Studio 2013\Projects\DaysAway\DaysAway\bin\Debug\DaysAway.xr.xml">
+      <PackagePath>DaysAway.xr.xml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ArturK\Documents\Visual Studio 2013\Projects\DaysAway\DaysAway\bin\Debug\resources.pri">
+      <PackagePath>resources.pri</PackagePath>
+    </AppxPackagedFile>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>

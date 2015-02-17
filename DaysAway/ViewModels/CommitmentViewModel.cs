@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DaysAway.Commands;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -10,8 +11,13 @@ namespace DaysAway.ViewModels
 {
     public class CommitmentViewModel : INotifyPropertyChanged
     {
- 
 
+        public NavigateToCommitment NavigateToCommitment { get; set; }
+
+        public CommitmentViewModel()
+        {
+            this.NavigateToCommitment = new NavigateToCommitment();
+        }
 
         public int Id { get; set; }
         public string Title { get; set; }

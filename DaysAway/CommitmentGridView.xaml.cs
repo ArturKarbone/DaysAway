@@ -101,11 +101,15 @@ namespace DaysAway
         /// </summary>
         private void GroupSection_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var key = ((CommitmentViewModel)e.ClickedItem).Id;
-            if (!Frame.Navigate(typeof(CommitmentView), key))
-            {
-                throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
-            }
+
+            var vm = (CommitmentViewModel)e.ClickedItem;
+            vm.NavigateToCommitment.Execute(vm);
+
+            //var key = ((CommitmentViewModel)e.ClickedItem).Id;
+            //if (!Frame.Navigate(typeof(CommitmentView), key))
+            //{
+            //    throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
+            //}
         }
  
 

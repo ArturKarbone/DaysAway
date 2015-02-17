@@ -1,20 +1,15 @@
-﻿<Application
-    x:Class="DaysAway.App"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:DaysAway">
-
-    <Application.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.ThemeDictionaries>
-                <ResourceDictionary x:Key="Default">
-                    <ImageBrush x:Key="HubBackgroundImageBrush" ImageSource="Assets/HubBackground.png"/>
-                </ResourceDictionary>
-                <ResourceDictionary x:Key="HighContrast">
-                    <ImageBrush x:Key="HubBackgroundImageBrush" ImageSource="{x:Null}"/>
-                </ResourceDictionary>
-            </ResourceDictionary.ThemeDictionaries>
-
+<Application x:Class="DaysAway.App" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:DaysAway">
+  <Application.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Default">
+          <ImageBrush x:Key="HubBackgroundImageBrush" ImageSource="Assets/HubBackground.png" />
         </ResourceDictionary>
-    </Application.Resources>
+        <ResourceDictionary x:Key="HighContrast">
+          <ImageBrush x:Key="HubBackgroundImageBrush" ImageSource="{x:Null}" />
+        </ResourceDictionary>
+      </ResourceDictionary.ThemeDictionaries>
+      <vm:ViewModelLocator x:Key="Locator" xmlns:vm="using:DaysAway.ViewModel" />
+    </ResourceDictionary>
+  </Application.Resources>
 </Application>

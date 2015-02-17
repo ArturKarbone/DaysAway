@@ -1,4 +1,7 @@
 ﻿using DaysAway.Commands;
+using DaysAway.Common;
+using DaysAway.Services;
+using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,17 +9,23 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace DaysAway.ViewModels
 {
     public class CommitmentViewModel : INotifyPropertyChanged
     {
 
-        public NavigateToCommitment NavigateToCommitment { get; set; }
+        public ICommand NavigateToCommitment { get; set; }
 
         public CommitmentViewModel()
         {
-            this.NavigateToCommitment = new NavigateToCommitment();
+            this.NavigateToCommitment = new RelayCommand<object>((parameter) =>
+            {
+                var navigationService = new NavigationService();
+                var commitment = parameter as CommitmentViewModel;
+                navigationService.Navigate(typeof(CommitmentView), commitment.Id);
+            });
         }
 
         public int Id { get; set; }

@@ -22,11 +22,12 @@
 
     <Grid x:Name="LayoutRoot">
         <Hub x:Name="Hub" x:Uid="Hub" Header="application name" Background="{ThemeResource HubBackgroundImageBrush}">
-            <HubSection x:Uid="HubSection1" Header="SECTION_1" DataContext="{Binding Commitments}" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
+            <HubSection x:Uid="HubSection1" Header="SECTION_1"  HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
                 <DataTemplate>
                     <StackPanel>
                         <Button Click="Button_Click">+</Button>
                     <ListView
+                        DataContext="{Binding Commitments}"
                         ItemsSource="{Binding}"
                         IsItemClickEnabled="True"
                         ItemClick="GroupSection_ItemClick"

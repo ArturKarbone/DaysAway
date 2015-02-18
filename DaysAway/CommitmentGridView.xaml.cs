@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DaysAway.Common;
 using DaysAway.DataModel;
+using DaysAway.ViewModel;
 using DaysAway.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -32,7 +33,7 @@ namespace DaysAway
     public sealed partial class CommitmentGridView : Page
     {
         private readonly NavigationHelper navigationHelper;
-        private readonly MainViewModel defaultViewModel = new MainViewModel();
+        private readonly MainViewModel defaultViewModel = App.Locator.Main;
         private readonly ResourceLoader resourceLoader = ResourceLoader.GetForCurrentView("Resources");
 
         public CommitmentGridView()
@@ -141,7 +142,8 @@ namespace DaysAway
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(CommitmentView), 0);
+            MainViewModel vm = ((Control)sender).DataContext as MainViewModel;
+            vm.NavigateToAddNewCommitment.Execute(null);          
         }
     }
 }

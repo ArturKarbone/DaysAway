@@ -50,7 +50,7 @@
             <TextBox Text="{Binding Title,Mode=TwoWay}" Margin="0,-6.5,0,26.5"  TextWrapping="NoWrap" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}" />
             <DatePicker Date="{Binding DueDate, Converter={StaticResource DateTimeToDateTimeOffsetConverter},Mode=TwoWay}"/>
             <TextBlock Text="{Binding Title, Mode=TwoWay}"></TextBlock>
-            <Button Content="Save" Click="Button_Click" />
+            <Button Content="Save" Command="{Binding InsertUpdateCommitment}" CommandParameter="{Binding}" />
         </StackPanel>
 
 

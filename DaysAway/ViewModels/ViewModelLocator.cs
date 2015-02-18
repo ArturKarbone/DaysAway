@@ -12,8 +12,10 @@
   See http://www.galasoft.ch/mvvm
 */
 
+using DaysAway.ViewModels;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
 
 namespace DaysAway.ViewModel
@@ -30,19 +32,21 @@ namespace DaysAway.ViewModel
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+            var navigationService = CreateNavigationService();
 
-            ////if (ViewModelBase.IsInDesignModeStatic)
-            ////{
-            ////    // Create design time view services and models
-            ////    SimpleIoc.Default.Register<IDataService, DesignDataService>();
-            ////}
-            ////else
-            ////{
-            ////    // Create run time view services and models
-            ////    SimpleIoc.Default.Register<IDataService, DataService>();
-            ////}
+            SimpleIoc.Default.Register<INavigationService>(() => navigationService);            
 
             SimpleIoc.Default.Register<MainViewModel>();
+        }
+
+
+        private INavigationService CreateNavigationService()
+        {
+            var navigationService = new NavigationService();
+
+            navigationService.Configure("Commitment", typeof(CommitmentView));            
+
+            return navigationService;
         }
 
         public MainViewModel Main

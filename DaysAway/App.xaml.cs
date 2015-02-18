@@ -1,4 +1,5 @@
 ﻿using DaysAway.Common;
+using DaysAway.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,6 +27,13 @@ namespace DaysAway
     /// </summary>
     public sealed partial class App : Application
     {
+        public static ViewModelLocator Locator
+        {
+            get
+            {
+                return (ViewModelLocator)Application.Current.Resources["Locator"];
+            }
+        }
         private TransitionCollection transitions;
 
         /// <summary>
@@ -36,6 +44,8 @@ namespace DaysAway
         {
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
+
+           
         }
 
         /// <summary>

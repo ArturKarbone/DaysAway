@@ -1,6 +1,9 @@
-﻿using DaysAway.Commands;
+﻿using AutoMapper;
+using DaysAway.Commands;
 using DaysAway.Common;
+using DaysAway.DataModel;
 using DaysAway.Services;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
@@ -13,19 +16,31 @@ using System.Windows.Input;
 
 namespace DaysAway.ViewModels
 {
-    public class CommitmentViewModel : INotifyPropertyChanged
+    public class CommitmentViewModel : ViewModelBase
     {
 
         public ICommand NavigateToCommitment { get; set; }
+        public ICommand NavigateToAddNewCommitment { get; set; }
+        public ICommand InsertUpdateCommitment { get; set; }
 
         public CommitmentViewModel()
         {
-            this.NavigateToCommitment = new RelayCommand<object>((parameter) =>
+            this.NavigateToCommitment = new RelayCommand<CommitmentViewModel>((commitmentVM) =>
             {
-                var navigationService = new NavigationService();
-                var commitment = parameter as CommitmentViewModel;
-                navigationService.Navigate(typeof(CommitmentView), commitment.Id);
+                var navigationService = new NavigationService();               
+                navigationService.Navigate(typeof(CommitmentView), commitmentVM.Id);
             });
+
+       
+
+            this.InsertUpdateCommitment = new RelayCommand<CommitmentViewModel>(async (commitmentVM)=>
+            {
+                var repo = new CommitmentInMemoryRepository();
+                await repo.InsertUpdate(Mapper.Map<Commitment>(commitmentVM));
+                var navigationService = new NavigationService();
+                navigationService.Navigate(typeof(CommitmentGridView));
+            });           
+
         }
 
         public int Id { get; set; }
@@ -38,20 +53,7 @@ namespace DaysAway.ViewModels
                 return (DueDate - DateTime.Now).Days;
             }
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-
-        // This method is called by the Set accessor of each property. 
-        // The CallerMemberName attribute that is applied to the optional propertyName 
-        // parameter causes the property name of the caller to be substituted as an argument. 
-        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
+      
 
     }
 }

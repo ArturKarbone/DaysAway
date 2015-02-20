@@ -1,7 +1,7 @@
 ﻿using System;
 namespace DaysAway.Repositories
 {
-    interface ICommitmentRepository
+    public interface ICommitmentRepository
     {
         global::System.Threading.Tasks.Task<global::DaysAway.DataModel.Commitment> Get(int key);
         global::System.Threading.Tasks.Task<global::System.Collections.Generic.List<global::DaysAway.DataModel.Commitment>> GetAll();

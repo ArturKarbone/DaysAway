@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using DaysAway.Commands;
 using DaysAway.Common;
 using DaysAway.DataModel;
-using DaysAway.Services;
+using DaysAway.Repositories;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,28 +18,29 @@ namespace DaysAway.ViewModels
 {
     public class CommitmentViewModel : ViewModelBase
     {
-
         public ICommand NavigateToCommitment { get; set; }
         public ICommand NavigateToAddNewCommitment { get; set; }
         public ICommand InsertUpdateCommitment { get; set; }
 
-        public CommitmentViewModel()
+        public INavigationService NavigationService { get; set; }
+        public ICommitmentRepository Repository { get; set; }
+
+
+        public CommitmentViewModel(INavigationService navigationService, ICommitmentRepository repository)
         {
+            this.NavigationService = navigationService;
+            this.Repository = repository;
+
             this.NavigateToCommitment = new RelayCommand<CommitmentViewModel>((commitmentVM) =>
             {
-                var navigationService = new NavigationService();               
-                navigationService.Navigate(typeof(CommitmentView), commitmentVM.Id);
+                NavigationService.NavigateTo("Commitment", commitmentVM.Id);
             });
 
-       
-
-            this.InsertUpdateCommitment = new RelayCommand<CommitmentViewModel>(async (commitmentVM)=>
+            this.InsertUpdateCommitment = new RelayCommand<CommitmentViewModel>(async (commitmentVM) =>
             {
-                var repo = new CommitmentInMemoryRepository();
-                await repo.InsertUpdate(Mapper.Map<Commitment>(commitmentVM));
-                var navigationService = new NavigationService();
-                navigationService.Navigate(typeof(CommitmentGridView));
-            });           
+                await Repository.InsertUpdate(Mapper.Map<Commitment>(commitmentVM));
+                NavigationService.NavigateTo("CommitmentGrid");
+            });
 
         }
 
@@ -53,7 +54,32 @@ namespace DaysAway.ViewModels
                 return (DueDate - DateTime.Now).Days;
             }
         }
-      
 
+
+        public async void Bind(int key)
+        {
+            if (key != 0)
+            {
+                var commitment = Mapper.Map<CommitmentViewModel>(await Repository.Get(key));                
+                this.Bind(commitment);
+            }
+            else
+            {
+                var model = App.Locator.NewCommitment;
+                model.DueDate = DateTime.Now;
+
+                this.Bind(model);
+            }
+        }
+
+        private void Bind(CommitmentViewModel vm)
+        {
+            this.Id = vm.Id;
+            this.Title = vm.Title;
+            this.DueDate = vm.DueDate;
+
+            this.RaisePropertyChanged("Title");
+            this.RaisePropertyChanged("DueDate");
+        }
     }
 }

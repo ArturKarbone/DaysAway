@@ -26,7 +26,7 @@ namespace DaysAway
     public sealed partial class CommitmentView : Page
     {
         private readonly NavigationHelper navigationHelper;
-        private readonly ObservableDictionary defaultViewModel = new ObservableDictionary();
+        private readonly CommitmentViewModel defaultViewModel = App.Locator.NewCommitment;
 
         public CommitmentView()
         {
@@ -49,7 +49,7 @@ namespace DaysAway
         /// Gets the view model for this <see cref="Page"/>.
         /// This can be changed to a strongly typed view model.
         /// </summary>
-        public ObservableDictionary DefaultViewModel
+        public CommitmentViewModel DefaultViewModel
         {
             get { return this.defaultViewModel; }
         }
@@ -66,20 +66,10 @@ namespace DaysAway
         /// a dictionary of state preserved by this page during an earlier
         /// session.  The state will be null the first time a page is visited.</param>
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
-        {
-            var repo = new CommitmentInMemoryRepository();
-            // TODO: Create an appropriate data model for your problem domain to replace the sample data.
+        {        
             var key = (int)e.NavigationParameter;
-            if (key != 0)
-            {
-                var commitment = Mapper.Map<CommitmentViewModel>(await repo.Get(key));
-                this.DefaultViewModel["Commitment"] = commitment;
-
-            }
-            else
-            {
-                this.DefaultViewModel["Commitment"] = new CommitmentViewModel { DueDate = DateTime.Now };
-            }
+            this.DefaultViewModel.Bind(key);
+           
         }
 
         /// <summary>
@@ -123,13 +113,5 @@ namespace DaysAway
 
         #endregion
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
-        {
-            //  http://bretstateham.com/binding-to-the-new-xaml-datepicker-and-timepicker-controls-to-the-same-datetime-value/
-
-            var repo = new CommitmentInMemoryRepository();
-            await repo.InsertUpdate(Mapper.Map<Commitment>(this.DataContext as CommitmentViewModel));
-            Frame.Navigate(typeof(CommitmentGridView));
-        }
     }
 }

@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
 using DaysAway.DataModel;
+using DaysAway.Repositories;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -17,33 +20,23 @@ namespace DaysAway.ViewModels
     public class MainViewModel : ViewModelBase
     {
         public INavigationService NavigationService { get; set; }
+        public ICommitmentRepository Repository { get; set; }
         public ICommand NavigateToAddNewCommitment { get; set; }
 
-        /// <summary>
-        /// Initializes a new instance of the MainViewModel class.
-        /// </summary>
-        public MainViewModel(INavigationService navigationService)
+        public MainViewModel(INavigationService navigationService, ICommitmentRepository repository)
         {
             this.NavigationService = navigationService;
+            this.Repository = repository;
+
 
             this.NavigateToAddNewCommitment = new RelayCommand(() =>
             {
                 NavigationService.NavigateTo("Commitment", 0);
             });
-
-
-            ////if (IsInDesignMode)
-            ////{
-            ////    // Code runs in Blend --> create design time data.
-            ////}
-            ////else
-            ////{
-            ////    // Code runs "for real"
-            ////}
         }
 
-        private List<CommitmentViewModel> m_Commitments;
-        public List<CommitmentViewModel> Commitments
+        private ObservableCollection<CommitmentViewModel> m_Commitments;
+        public ObservableCollection<CommitmentViewModel> Commitments
         {
             get
             {
@@ -58,8 +51,8 @@ namespace DaysAway.ViewModels
 
         public async Task Bind()
         {
-            var commitmentRepository = new CommitmentInMemoryRepository();
-            this.Commitments = (await commitmentRepository.GetAll()).Select(x => Mapper.Map<CommitmentViewModel>(x)).ToList();
+            var commitments = await Repository.GetAll();
+            this.Commitments = new ObservableCollection<CommitmentViewModel>(commitments.Select(x => Mapper.Map<CommitmentViewModel>(x)));
         }
     }
 }

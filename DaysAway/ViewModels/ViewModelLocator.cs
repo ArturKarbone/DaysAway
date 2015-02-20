@@ -12,11 +12,14 @@
   See http://www.galasoft.ch/mvvm
 */
 
+using DaysAway.DataModel;
+using DaysAway.Repositories;
 using DaysAway.ViewModels;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
+using System;
 
 namespace DaysAway.ViewModel
 {
@@ -34,9 +37,13 @@ namespace DaysAway.ViewModel
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
             var navigationService = CreateNavigationService();
 
-            SimpleIoc.Default.Register<INavigationService>(() => navigationService);            
+            SimpleIoc.Default.Register<INavigationService>(() => navigationService);
+            SimpleIoc.Default.Register<ICommitmentRepository>(() => new CommitmentInMemoryRepository());
 
             SimpleIoc.Default.Register<MainViewModel>();
+            //SimpleIoc.Default.Register<CommitmentViewModel>();
+            SimpleIoc.Default.Register<CommitmentViewModel>(() => new CommitmentViewModel(navigationService, new CommitmentInMemoryRepository()));
+            
         }
 
 
@@ -44,7 +51,9 @@ namespace DaysAway.ViewModel
         {
             var navigationService = new NavigationService();
 
-            navigationService.Configure("Commitment", typeof(CommitmentView));            
+            navigationService.Configure("Commitment", typeof(CommitmentView));
+            navigationService.Configure("CommitmentGrid", typeof(CommitmentGridView));
+
 
             return navigationService;
         }
@@ -56,7 +65,15 @@ namespace DaysAway.ViewModel
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
-        
+
+        public CommitmentViewModel NewCommitment
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<CommitmentViewModel>(Guid.NewGuid().ToString());
+            }
+        }
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

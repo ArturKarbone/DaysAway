@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using DaysAway.DataModel;
 using DaysAway.ViewModels;
+using GalaSoft.MvvmLight.Ioc;
+using Microsoft.Practices.ServiceLocation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +15,13 @@ namespace DaysAway
     {
         public static void Configure()
         {
-            Mapper.CreateMap<Commitment, CommitmentViewModel>();
+           // Mapper.Configuration.ConstructServicesUsing(ServiceLocator.Current.GetInstance);           
+            Mapper.Configuration.ConstructServicesUsing(x => ServiceLocator.Current.GetInstance(x,Guid.NewGuid().ToString()));            
+            
+            Mapper.CreateMap<Commitment, CommitmentViewModel>()
+                .ConstructUsingServiceLocator();
+                   
             Mapper.CreateMap<CommitmentViewModel, Commitment>();
-
         }
     }
 }
